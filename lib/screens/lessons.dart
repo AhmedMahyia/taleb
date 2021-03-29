@@ -15,12 +15,14 @@ class Lessons extends StatefulWidget {
 }
 
 class _LessonsState extends State<Lessons> {
-
   //List<UnitLessonsModel> unitLessons;
-  List<UnitLessonsModel> fromJsonArray(String jsonString) => List<UnitLessonsModel>.from(json.decode(jsonString).map((e) => UnitLessonsModel.fromJson(e)));
-  
-  Future<List<UnitLessonsModel>> getUnitLessons(int index)async{
-    http.Response response = await http.get("http://mohamed153-001-site1.btempurl.com/api/Lessons/GetUnitClasses/$index");
+  List<UnitLessonsModel> fromJsonArray(String jsonString) =>
+      List<UnitLessonsModel>.from(
+          json.decode(jsonString).map((e) => UnitLessonsModel.fromJson(e)));
+
+  Future<List<UnitLessonsModel>> getUnitLessons(int index) async {
+    http.Response response = await http.get(
+        "http://mohamed153-001-site1.btempurl.com/api/Lessons/GetUnitClasses/$index");
     return fromJsonArray(response.body);
   }
 
@@ -37,30 +39,37 @@ class _LessonsState extends State<Lessons> {
             ),
           ),
           child: ListView.builder(
-            itemCount: widget.lessons.length,
-            itemBuilder: (context,index){
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(8,8,8,0),
-                child: GestureDetector(
-                  onTap: ()async{
-                    List<UnitLessonsModel>  myLessons;
-                    myLessons = await getUnitLessons(widget.lessons[index].contentId);
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> UnitLessons(unitLessons: myLessons)));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.5),
-                      borderRadius: BorderRadius.circular(20),
+              itemCount: widget.lessons.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  child: GestureDetector(
+                    onTap: () async {
+                      List<UnitLessonsModel >myLessons;
+                      myLessons =
+                          await getUnitLessons(widget.lessons[index].contentId);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  UnitLessons(unitLessons: myLessons)));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(.5),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      width: MediaQuery.of(context).size.width * 3 / 4,
+                      height: 40,
+                      child: Center(
+                          child: Text(
+                        widget.lessons[index].contentName,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      )),
                     ),
-                    width: MediaQuery.of(context).size.width*3/4,
-                    height: 40,
-                    child: Center(child: Text(widget.lessons[index].contentName,style: TextStyle(color: Colors.black,fontSize: 20),)),
                   ),
-                ),
-              );
-            } 
-          ),
-        )
-      );
+                );
+              }),
+        ));
   }
 }

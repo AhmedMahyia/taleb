@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taleb/models/exams_model.dart';
 import 'package:taleb/models/main_question_model.dart';
 import 'package:taleb/models/question_model.dart';
@@ -43,7 +44,8 @@ class _ExamsState extends State<Exams> {
                 for (var question in questionsModel) {
                   questions.add(QuestionModel.fromJson(question.question));
                 }
-                print(questions[0].choice_1);
+                
+                
                 
                 //QuestionModel fromJsonArray2(String jsonString) => QuestionModel.fromJson(json.decode(jsonString));
                 // List<QuestionModel> examQuestions =[];
@@ -74,7 +76,7 @@ class _ExamsState extends State<Exams> {
                           child: Text("موافق", style:TextStyle(color: Colors.white) ,),
                           onPressed: (){
                             Navigator.pop(context);
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ExamQuestions(questions: questions)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ExamQuestions(questions: questions,duration: widget.exams[index].duration,)));
                             
                           },
                         ),

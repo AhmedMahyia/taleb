@@ -23,7 +23,7 @@ class _QuestionFormState extends State<QuestionForm> {
     final prefs = await SharedPreferences.getInstance();
     if (groupValue==0) {
       print("Question has not been answered");
-      prefs.setBool("questionResult_${widget.question.questionId}",null);
+      prefs.setBool("questionResult_${widget.question.questionId}",false);
       print("${widget.question.correctChoice}");
     } else {
       if (groupValue1 == widget.question.correctChoice) {

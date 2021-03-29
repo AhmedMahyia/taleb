@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taleb/models/unit_lessons_model.dart';
+import 'package:taleb/screens/lesson_content.dart';
 import 'package:taleb/widgets/drawer.dart';
 import 'package:taleb/widgets/my_appbar.dart';
 import 'dart:convert';
@@ -34,7 +35,7 @@ class _UnitLessonsState extends State<UnitLessons> {
               padding: const EdgeInsets.fromLTRB(8,8,8,0),
               child: GestureDetector(
                 onTap: (){
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LessonContent()));
                 },
                 child: Container(
                   decoration: BoxDecoration(
